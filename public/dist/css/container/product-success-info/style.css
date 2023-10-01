@@ -1,0 +1,17 @@
+.box {
+  display: flex;
+  flex-direction: row;
+}
+.box__message {
+  font-size: 20px;
+}
+.box__button {
+  border: 1px solid #ddd;
+  padding: 8px;
+  border-radius: 10px;
+  background-color: #0D6EFD;
+  color: #ddd;
+  margin: 8px;
+}
+
+/*# sourceMappingURL=style.css.map */
