@@ -7,8 +7,8 @@ const router = express.Router()
 class Product {
   static #list = []
   constructor(name, price, description) {
-    this.id = parseInt(Math.random() * 100000)
-    this.createData = new Date().toString()
+    this.id = new Math.random()
+    this.createData = new Date.toString()
     this.name = name
     this.price = price
     this.description = description
@@ -36,7 +36,7 @@ class Product {
   static updateByID = (id, data) => {
     const product = this.getByID(id)
     if (product) {
-      Object.assign(product, data)
+      this.update(product, data)
       return true
     } else {
       return false
@@ -48,15 +48,15 @@ class Product {
 // router.get Створює нам один ентпоїнт
 
 // ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/product-create', function (req, res) {
+router.get('/', function (req, res) {
   // res.render генерує нам HTML сторінку
   const list = Product.getList()
   // ↙️ cюди вводимо назву файлу з сontainer
   res.render('product-index', {
     // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-index',
+    style: 'index',
     data: {
-      products: {
+      users: {
         list,
         isEmpty: list.length === 0,
       },
@@ -66,69 +66,45 @@ router.get('/product-create', function (req, res) {
 })
 
 // ================================================================
-router.post('/product-create', function (req, res) {
-  const { name, price, description } = req.body
-  console.log(req.body)
-  const product = new Product(name, price, description)
-  Product.add(product)
-  console.log(Product.getList())
-  res.render('product-success-info', {
-    style: 'product-success-info',
-    info: 'Продукт створено',
+router.post('/user-create', function (req, res) {
+  const { email, login, password } = req.body
+  const user = new User(email, login, password)
+  User.add(user)
+  console.log(User.getList())
+  res.render('success-info', {
+    style: 'success-info',
+    info: 'Користувача створено',
   })
 })
 // ================================================================
-router.get('/product-delete', function (req, res) {
+router.get('conteiner/user-delete', function (req, res) {
   const { id } = req.query
   console.log(typeof id)
-  const product = Product.deleteByID(Number(id))
-  if (product) {
+  const user = User.deleteByID(Number(id))
+  if (user) {
     console.log('!!!!!!!!!!!!!')
   }
   res.render('success-info', {
     style: 'success-info',
-    info: 'Товар видалено',
+    info: 'Користувача видалено',
   })
 })
 // ================================================================
-router.post('/product-edit', function (req, res) {
-  const { name, price, description, id } = req.body
-  const product = Product.getByID(Number(id))
-
-  const result = Product.updateByID(Number(id), {
-    name,
-    price,
-    description,
-  })
+router.post('/user-update', function (req, res) {
+  const { email, password, id } = req.body
+  const user = User.getByID(Number(id))
+  let result = false
+  if (user.verivyPassword(password)) {
+    User.update(user, { email })
+    result = true
+  }
 
   res.render('success-info', {
     style: 'success-info',
-    info: result ? 'Товар оновлено' : 'Сталася помілка',
+    info: result
+      ? 'Email пошта оновлена'
+      : 'Сталася помілка',
   })
 })
-// ================================================================
-// router.get Створює нам один ентпоїнт
-
-// ↙️ тут вводимо шлях (PATH) до сторінки
-router.get('/product-list', function (req, res) {
-  // res.render генерує нам HTML сторінку
-  const list = Product.getList()
-  // ↙️ cюди вводимо назву файлу з сontainer
-  res.render('product-list', {
-    // вказуємо назву папки контейнера, в якій знаходяться наші стилі
-    style: 'product-index',
-    data: {
-      products: {
-        list,
-        isEmpty: list.length === 0,
-      },
-    },
-  })
-  // ↑↑ сюди вводимо JSON дані
-})
-
-// =====================================================
-// ================================================================
-
 // Підключаємо роутер до бек-енду
 module.exports = router

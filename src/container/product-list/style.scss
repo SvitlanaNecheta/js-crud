@@ -1,0 +1,70 @@
+@use '../../lib/service.scss' as s;
+
+.form{
+    display: flex;
+    flex-direction: column;
+    padding: s.space(4);
+    gap: s.space(8);display: flex;
+    justify-content: space-between;
+    border:1px solid s.color('light'); 
+    
+    &__title{
+        font-size: 20px;
+        font-weight: bold;
+        color: s.color('light_blue');
+        padding-bottom: s.space(1);
+    }
+    &__card{
+    flex-direction: row;
+    align-items: flex-start;
+    width: 600px;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.13);
+    background: #FFF;
+    &__content{
+        display:flex;
+        gap: s.space(6);
+        padding: 24px;
+    }
+    &__field{
+        display: flex;
+        flex-direction: column;
+        gap: s.space(2);
+        padding: s.space(2);;
+    }
+    &__label{
+        font-size: 14px;
+    }
+    &__input{
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+    }
+    &__button{
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+        width: 500;
+        border-radius: 20px;
+        background-color: s.color('light_blue');
+        color: s.color('light');
+        margin: s.space(2);
+    }
+    &__button1{
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+        border-radius: 20px;
+        background-color: s.color('dangerrous');
+        color: s.color('light');
+    }
+    }
+}
+main{
+    display: flex;
+    flex-direction: column;
+    gap: s.space(10);
+}
+.product-list{
+    padding-right: 15px;
+    padding-top: 10px;
+    padding-bottom:10px;
+     
+}

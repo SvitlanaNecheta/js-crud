@@ -1,0 +1,23 @@
+@use '../../lib/service.scss' as s;
+.box{
+   display: flex;
+   flex-direction: row;
+
+    
+    &__message{
+        
+        font-size: 20px;
+    
+    }
+   
+    &__button{
+        border: 1px solid s.color('light');
+        padding: s.space(2);
+        border-radius: 10px;
+        background-color: s.color('light_blue');
+        color: s.color('light');
+        margin: s.space(2);
+    }
+    
+     
+}
